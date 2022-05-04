@@ -15,5 +15,5 @@ Of course everything is provided with (Models, textures etc).
 
 Mandatory dependency -> TMP & UdonSharp & World SDK 3
 
-Ko-fi : 
-GumRoad : 
+Ko-fi : https://ko-fi.com/s/e1b236414b
+GumRoad : https://furranystudio.gumroad.com/l/NoteBlockforVRC
