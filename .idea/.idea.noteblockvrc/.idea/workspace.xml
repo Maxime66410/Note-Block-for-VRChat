@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25d1e2b6-bb1b-4baf-bc4c-28f27da28ea7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.noteblockvrc/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.noteblockvrc/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Note Block/Scripts/noteBlock.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Note Block/Scripts/noteBlock.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Note Block/Scripts/noteBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Note Block/Scripts/noteBlock.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/SerializedUdonPrograms/9b54e9e071c09494da8f7333547673e5.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SerializedUdonPrograms/9b54e9e071c09494da8f7333547673e5.asset" afterDir="false" />
@@ -61,7 +62,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651702858095</updated>
-      <workItem from="1651702866255" duration="375000" />
+      <workItem from="1651702866255" duration="1166000" />
     </task>
     <servers />
   </component>
