@@ -1,69 +1,78 @@
 ﻿// By Maxime66410
 
-using System;
-using TMPro;
-using UdonSharp;
-using UnityEngine;
-using UnityEngine.UI;
-using VRC.SDKBase;
-using VRC.Udon;
-using VRC.Udon.Common.Interfaces;
+using System; // Unused
+using TMPro;    // TextMesh Pro is an easy-to-use system for high-quality text.
+using UdonSharp;    // Library UdonSharp
+using UnityEngine;  //  Library Unity
+using UnityEngine.UI;   //  Library UI Unity
+using VRC.SDKBase;  // Unused
+using VRC.Udon; // Unused
+using VRC.Udon.Common.Interfaces;   // VRC Library for network
 
 public class noteBlock : UdonSharpBehaviour
 {
     [Header("Integration Component")]
-    private AudioChorusFilter _audioChorusFilter;
-    [SerializeField] private Slider _sliderChangeAudio;
-    [SerializeField] private TextMeshProUGUI _textSliderNumber;
-    public AudioClip[] _audioClips;
-    public AudioSource _audioSource;
-    [UdonSynced] public int TypeSound;
-    [UdonSynced] public float SliderValue;
-    public GameObject prefabEfect;
-    private float TimeToDisable = 0.0f;
+    private AudioChorusFilter _audioChorusFilter;   // Component Audio Filter
+    [SerializeField] private Slider _sliderChangeAudio; // Component Slider UI
+    [SerializeField] private TextMeshProUGUI _textSliderNumber; // Component ->Text<- Mesh Pro
+    public AudioClip[] _audioClips; // Component Array Clip
+    public AudioSource _audioSource;    // Component Audio Source
+    public GameObject prefabEfect;  // Component GameObject for Effect
+    
+    
+    [Header("Global Value")]
+    [UdonSynced] public int TypeSound;  // Type of Sound (SYNC)
+    [UdonSynced] public float SliderValue;  // SliderValue (SYNC)
+    private float TimeToDisable = 0.0f; //  Time Disable Effect (NO SYNC)
 
-    void Start()
+    void Start()    // Start is called on the frame when a script is enabled just before any of the Update methods are called the first time.
     {
-        if (_audioChorusFilter == null)
+        if (_audioChorusFilter == null) // if audio Chorus if empty, then search in the gameobject
         {
             _audioChorusFilter = this.gameObject.GetComponent<AudioChorusFilter>();
         }
     }
 
-    public void Update()
+    public void Update()    // Update is called every frame, if the MonoBehaviour is enabled.
     {
-        _textSliderNumber.text = SliderValue.ToString();
-        _audioChorusFilter.depth = SliderValue;
-        _sliderChangeAudio.value = SliderValue;
+        _textSliderNumber.text = SliderValue.ToString();    // Set text with Slider Value
+        _audioChorusFilter.depth = SliderValue; // Set value in Depth of Chorus Filter
+        _sliderChangeAudio.value = SliderValue; // Set Value on Slider
 
-        if (prefabEfect.activeSelf)
+        if (prefabEfect.activeSelf) // If effect is ON
         {
-            TimeToDisable = TimeToDisable + Time.deltaTime;
+            TimeToDisable = TimeToDisable + Time.deltaTime; // Add Time Secondes
 
-            if (TimeToDisable >= 1.0f)
+            if (TimeToDisable >= 1.0f)  // if TimeToDisable is greater than 1.0f
             {
-                prefabEfect.SetActive(false);
-                TimeToDisable = 0.0f;
+                prefabEfect.SetActive(false);   // Disable Effect
+                TimeToDisable = 0.0f;   // Reset Timer
             }
         }
     }
 
-    public void SyncSlider()
+    public void SyncSlider()    // Sync Slider
     {
         SliderValue = _sliderChangeAudio.value;
     }
 
-    public override void OnPickupUseUp()
+    public override void OnPickupUseUp()    // if Player Use Pickup
     {
-        SendCustomNetworkEvent(NetworkEventTarget.All, "LaunchSound");
+        SendCustomNetworkEvent(NetworkEventTarget.All, "LaunchSound");  // Launch All Function -> LaunchSound -> ALL
     }
 
-    public void LaunchSound()
+    public void LaunchSound()   // Function to Launch Song
     {
-        _audioSource.PlayOneShot(_audioClips[TypeSound]);
-        prefabEfect.SetActive(true);
+        _audioSource.PlayOneShot(_audioClips[TypeSound]);   // Plays an AudioClip, and scales the AudioSource volume by volumeScale.
+        prefabEfect.SetActive(true);    // Enable Effect
     }
 
+    /// <summary>
+    /// A bit of a mess, but that's how I set a type of sound.
+    /// We can clearly improve or optimize all this, but I let you do as you see fit.
+    /// It's a quick little script.
+    /// </summary>
+    
     public void setBanjo()
     {
         TypeSound = 0;
